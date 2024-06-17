@@ -49,7 +49,6 @@ const MyPage = () => {
                 <p>참여중인 허니팟이 없습니다.</p>
                 <div className='find-honeypot-btn'>허니팟 찾기</div>
             </div>
-
         </div>
     </div>
   );

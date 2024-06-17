@@ -16,7 +16,7 @@ const Header = () => {
         <Link to="/about">허니팟</Link>
       </div>
       <div className='nav-title'>
-        <Link to="/about">고객센터</Link>
+        <Link to="/help">고객센터</Link>
       </div>
       <div className='mypage-btn'>
         <Link to="/mypage"><img src={`${process.env.PUBLIC_URL}/images/common/mypage-icon.png`} alt="로고" /></Link>

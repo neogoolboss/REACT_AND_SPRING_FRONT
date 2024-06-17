@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    --main-color: #FBB755;
+}
+
+.main-content {
+    padding-top: 80px; /* Header의 높이만큼 상단 여백을 줌 */
+    padding-bottom: 100px; /* Footer의 높이만큼 하단 여백을 줌 */
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+}
+
+.help-container {
+    width: 1200px;
+    min-height: 400px;
+    height: 100%;
+    margin:0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,10 +1,11 @@
 import React from 'react';
+import './HoneyPotPage.css';
 
 const HoneyPotPage = () => {
   return (
-    <div>
+    <div className='honeypot-container'>
       <h1>HoneyPotPage</h1>
-      <p>HoneyPotPage!</p>
+      <p>허니팟 페이지</p>
     </div>
   );
 };
