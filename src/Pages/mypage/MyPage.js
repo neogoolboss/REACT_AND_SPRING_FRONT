@@ -1,9 +1,17 @@
 import React from 'react';
 import './MyPage.css';
-import '../styles/fonts.css';
+import '../../styles/fonts.css';
+import MyHoneypot from '../../Components/mypage/MyHoneypot';
+import ParticipatingHoneypot from '../../Components/mypage/ParticipatingHoneypot';
+import MyComments from '../../Components/mypage/MyComments';
+import { useState } from 'react'
 
 
 const MyPage = () => {
+
+    const [selectedMenu, setSelectedMenu] = useState('participatingHoneypot')
+
+
   return (
     <div className='mypage-container'>
         {/* 페이지 제목 */}
@@ -34,22 +42,28 @@ const MyPage = () => {
             </div>
         </div>
         {/* 프로필 상부 */}
-        {/* 프로필 메인 */}
+        {/* 마이페이지 메인 - 고정 카테고리 */}
         <div className='mypage-main-container'>
             <div className='mypage-category'>
-                <p className='category-main'>허니팟</p>
-                <p className='category-sub'>참여중인 허니팟</p>
-                <p className='category-sub'>내가 만든 허니팟</p>
-                <p className='category-sub'>내가 쓴 댓글</p>
+                <p onClick={() => { setSelectedMenu('participatingHoneypot')}} className='category-main'>허니팟</p>
+                <p onClick={() => { setSelectedMenu('participatingHoneypot')}} className='category-sub'>참여중인 허니팟</p>
+                <p onClick={() => { setSelectedMenu('myHoneypot')}} className='category-sub'>내가 만든 허니팟</p>
+                <p onClick={() => { setSelectedMenu('myComments')}} className='category-sub'>내가 쓴 댓글</p>
                 <p className='category-main'>멤버 평가</p>
                 <p className='category-main'>문의 내역</p>
                 <p className='category-main'>프로필 수정</p>
             </div>
-            <div className='category-detail'>
-                <p>참여중인 허니팟이 없습니다.</p>
-                <div className='find-honeypot-btn'>허니팟 찾기</div>
-            </div>
+            {/* 마이페이지 메인 - 고정 디테일 */}
+            {/* <ParticipatingHoneypot/> */}
+            {/* <MyHoneypot/> */}
+            {/* <MyComments/> */}
+
+            {selectedMenu === 'participatingHoneypot' && <ParticipatingHoneypot/>}
+            {selectedMenu === 'myHoneypot' && <MyHoneypot/>}
+            {selectedMenu === 'myComments' && <MyComments/>}
+            {/* 마이페이지 메인 - 고정 디테일 */}
         </div>
+       
     </div>
   );
 };
