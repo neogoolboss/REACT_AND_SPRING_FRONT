@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './MyPage.css';
 import '../../styles/fonts.css';
 import MyHoneypot from '../../Components/mypage/MyHoneypot';
@@ -54,6 +55,9 @@ const MyPage = () => {
                 <p className='category-main'>문의 내역</p>
                 <p className='category-main'>프로필 수정</p>
             </div>
+
+            
+
             {/* 마이페이지 메인 - 고정 디테일 */}
             {/* <ParticipatingHoneypot/> */}
             {/* <MyHoneypot/> */}
@@ -63,6 +67,9 @@ const MyPage = () => {
             {selectedMenu === 'myHoneypot' && <MyHoneypot/>}
             {selectedMenu === 'myComments' && <MyComments/>}
             {selectedMenu === 'review' && <Review />}
+            
+            
+
             {/* 마이페이지 메인 - 고정 디테일 */}
         </div>
        

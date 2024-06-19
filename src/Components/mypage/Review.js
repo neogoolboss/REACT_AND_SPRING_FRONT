@@ -3,6 +3,27 @@ import { useState } from "react";
 
 function MyComments() {
   let [자료있음, 자료변경] = useState(false);
+  const [showReCheckModal, setShowReCheckModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  /* 제출버튼 눌렀을 때 모달창 띄우기 */
+  const reviewSubmit = () => {
+    setShowReCheckModal(true);
+  }
+
+  /* 확인버튼 */
+  const okBtn = () => {
+    setShowReCheckModal(false);
+    setShowConfirmModal(true);
+  }
+
+  const noBtn = () => {
+    setShowReCheckModal(false);
+  }
+
+  const confirmBtn = () => {
+    setShowConfirmModal(false);
+  }
 
   /* 프로필 선택 */
   const profiles = [
@@ -13,23 +34,26 @@ function MyComments() {
 
   const [selectedProfileIndex, setSelectedProfileIndex] = useState(null);
 
-  const handleProfileClick = (index) => {
+  const profileClick = (index) => {
     setSelectedProfileIndex(index);
     setSelectedPointIndex(null); // 프로필 선택 시 포인트 선택 초기화
-};
+    setSelectedRadio(null); // 프로필 선택 시 라디오 버튼 초기화
+  };
 
-const handlePointClick = (index) => {
+  const pointClick = (index) => {
     setSelectedPointIndex(index);
-};
-
+    setSelectedRadio(null);
+  };
 
   /* 프로필 선택 */
 
   /* 평점 얼굴 선택 */
   const [selectedPointIndex, setSelectedPointIndex] = useState(null);
-
+  const [selectedRadio, setSelectedRadio] = useState(null);
+  
   const choiceFace = (index) => {
     setSelectedPointIndex(index);
+    setSelectedRadio(null);
   };
 
   const pointChoices = [
@@ -42,6 +66,129 @@ const handlePointClick = (index) => {
   /* 평점 얼굴 선택 */
 
   /* 평점 얼굴 선택시 텍스트 */
+
+  const choiceText = () => {
+    switch (selectedPointIndex) {
+      case 0:
+        return (
+          <>
+            <label for="choice1" className="radio-box">
+              <input type="radio" id="choice1" name="choice" value="option1"
+                checked={selectedRadio === "option1"}
+                onChange={() => setSelectedRadio("option1")}/>
+              <span className="radio-btn"></span>
+              사전 연락 없이 무단으로 모임에 불참했어요.
+            </label>
+            <label for="choice2" className="radio-box">
+              <input type="radio" id="choice2" name="choice" value="option2"
+                checked={selectedRadio === "option2"}
+                onChange={() => setSelectedRadio("option2")}/>
+              <span className="radio-btn"></span>
+              불참 의사를 멤버들에게 알리고 모임에 불참했어요.
+            </label>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <label for="choice1" className="radio-box">
+              <input type="radio" id="choice1" name="choice" value="option1"
+                checked={selectedRadio === "option1"}
+                onChange={() => setSelectedRadio("option1")} />
+              <span className="radio-btn"></span>
+              시간 약속을 지키지 않아서 다른 사람들이 모두 기다렸어요.
+            </label>
+            <label for="choice2" className="radio-box">
+              <input type="radio" id="choice2" name="choice" value="option2"
+                checked={selectedRadio === "option2"}
+                onChange={() => setSelectedRadio("option2")} />
+              <span className="radio-btn"></span>
+              이성에 대한 과도한 관심을 보여서 불편했어요.
+            </label>
+            <label for="choice3" className="radio-box">
+              <input type="radio" id="choice3" name="choice" value="option3"
+                checked={selectedRadio === "option3"}
+                onChange={() => setSelectedRadio("option3")} />
+              <span className="radio-btn"></span>
+              수동적이고 소극적인 태도여서 함께하기 어색했어요.
+            </label>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <label for="choice1" className="radio-box">
+              <input type="radio" id="choice1" name="choice" value="option1"
+                checked={selectedRadio === "option1"}
+                onChange={() => setSelectedRadio("option1")} />
+              <span className="radio-btn"></span>
+              싫지도 좋지도 않았어요.
+            </label>
+            <label for="choice2" className="radio-box">
+              <input type="radio" id="choice2" name="choice" value="option2"
+                checked={selectedRadio === "option2"}
+                onChange={() => setSelectedRadio("option2")} />
+              <span className="radio-btn"></span>
+              평범한 경험이었어요.
+            </label>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <label for="choice1" className="radio-box">
+              <input type="radio" id="choice1" name="choice" value="option1"
+                checked={selectedRadio === "option1"}
+                onChange={() => setSelectedRadio("option1")} />
+              <span className="radio-btn"></span>
+              대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.
+            </label>
+            <label for="choice2" className="radio-box">
+              <input type="radio" id="choice2" name="choice" value="option2"
+                checked={selectedRadio === "option2"}
+                onChange={() => setSelectedRadio("option2")} />
+              <span className="radio-btn"></span>
+              다른 멤버가 이야기 할 때 잘 들어주셨어요.
+            </label>
+            <label for="choice3" className="radio-box">
+              <input type="radio" id="choice3" name="choice" value="option3"
+                checked={selectedRadio === "option3"}
+                onChange={() => setSelectedRadio("option3")} />
+              <span className="radio-btn"></span>
+              주도적으로 모임에 잘 참여해 주셨어요.
+            </label>
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <label for="choice1" className="radio-box">
+              <input type="radio" id="choice1" name="choice" value="option1"
+                checked={selectedRadio === "option1"}
+                onChange={() => setSelectedRadio("option1")} />
+              <span className="radio-btn"></span>
+              취향이 통하는 멤버를 만나 좋았어요. 다음에 또 만나고 싶어요.
+            </label>
+            <label for="choice2" className="radio-box">
+              <input type="radio" id="choice2" name="choice" value="option2"
+                checked={selectedRadio === "option2"}
+                onChange={() => setSelectedRadio("option2")} />
+              <span className="radio-btn"></span>
+              유쾌하고 밝은 에너지로 분위기 메이커 역할을 했어요.
+            </label>
+            <label for="choice3" className="radio-box">
+              <input type="radio" id="choice3" name="choice" value="option3"
+                checked={selectedRadio === "option3"}
+                onChange={() => setSelectedRadio("option3")} />
+              <span className="radio-btn"></span>
+              덕분에 시간가는줄 모르고 즐거운 경험을 했어요.
+            </label>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -100,57 +247,115 @@ const handlePointClick = (index) => {
               </div>
             </div>
             <div className="choice-profile">
-                {profiles.map((profile, index) => (
-                    <div
-                        className="one-profile"
-                        onClick={() => handleProfileClick(index)}
-                        key={index}
-                        style={{
-                            opacity: selectedProfileIndex !== null && selectedProfileIndex !== index ? 0.3 : 1,
-                            cursor: 'pointer', // 선택 가능하다는 것을 시각적으로 표시
-                        }}
-                    >
-                        <img src={`${process.env.PUBLIC_URL}${profile.imgSrc}`} alt="프로필사진" />
-                        <p style={{
-                            color: selectedProfileIndex === index ? '#EB844A' : 'inherit',
-                            fontFamily: selectedProfileIndex === index ? "'SUIT Semibold', sans-serif" : "'var(--blur-color)'"
-                        }}>{profile.name}</p>
-                    </div>
-                ))}
-            </div>
+  {profiles.map((profile, index) => (
+    <div
+      className="one-profile"
+      onClick={() => profileClick(index)}
+      key={index}
+      style={{
+        opacity:
+          selectedProfileIndex !== null && selectedProfileIndex !== index
+            ? 0.3
+            : 1,
+        cursor: "pointer",
+      }}
+    >
+      <img
+        src={`${process.env.PUBLIC_URL}${profile.imgSrc}`}
+        alt="프로필사진"
+      />
+      <p
+        style={{
+          color: selectedProfileIndex === index ? "#EB844A" : "var(--blur-color)",
+          fontFamily: selectedProfileIndex === index
+            ? "'SUIT Semibold', sans-serif"
+            : "'SUIT Regular', sans-serif",
+          fontSize: "12px",
+        }}
+      >
+        {profile.name}
+      </p>
+    </div>
+  ))}
+</div>
             {/*멤버 프로필 선택 시*/}
             <div className="choice-point-container">
-                {selectedProfileIndex !== null ? (
-                    pointChoices.map((pointChoice, index) => (
-                        <div
-                            className="choice-point"
-                            onClick={() => handlePointClick(index)}
-                            key={index}
-                            style={{
-                                opacity: selectedPointIndex !== null && selectedPointIndex !== index ? 0.3 : 1,
-                                cursor: 'pointer' // 선택 가능하다는 것을 시각적으로 표시
-                            }}
-                        >
-                            <img src={`${process.env.PUBLIC_URL}${pointChoice.imgSrc}`} alt="점수선택사진" />
-                            <p>{pointChoice.text}</p>
-                        </div>
-                    ))
-                ) : (
-                    // 선택된 프로필이 없는 경우 빈 div로 처리
-                    <div></div>
-                )}
+              {selectedProfileIndex !== null ? (
+                pointChoices.map((pointChoice, index) => (
+                  <div
+                    className="choice-point"
+                    onClick={() => pointClick(index)}
+                    key={index}
+                    style={{
+                      opacity:
+                        selectedPointIndex !== null &&
+                        selectedPointIndex !== index
+                          ? 0.3
+                          : 1,
+                      cursor: "pointer", // 선택 가능하다는 것을 시각적으로 표시
+                    }}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}${pointChoice.imgSrc}`}
+                      alt="점수선택사진"
+                    />
+                    <p>{pointChoice.text}</p>
+                  </div>
+                ))
+              ) : (
+                // 선택된 프로필이 없는 경우 빈 div로 처리
+                <div></div>
+              )}
             </div>
-            
-            {/* 못 만났어요 선택 시 */}
-            <div className="choice-text">
 
+            <div className="choice-text">
+              {choiceText()}
             </div>
-            <button>제출</button>
+
+            {selectedRadio && (
+              <input className="send-review-btn" type="submit" value='제출' onClick={reviewSubmit}/>
+            )}
           </div>
+            
         </div>
       </div>
+      {/* 제출확인 Modal */}
+      {showReCheckModal && (
+        <div className="modal-container">
+          <div className="modal-content">
+          <img src={`${process.env.PUBLIC_URL}/images/mypage/exclamationmark.png`}/>
+            <p className="modal-semibold">평가를 제출하시겠습어요?</p>
+            <p className="modal-regular">제출하면 더이상 내용을 수정할 수 없어요!!</p>
+            <div className="modal-buttons">
+              <button className="modal-button no" onClick={noBtn}>
+                취소
+              </button>
+              <button className="modal-button yes" onClick={okBtn}>
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 제출확인 Modal */}
+      {showConfirmModal && (
+        <div className="confirm-modal-container">
+          <div className="confirm-modal-content">
+          <img src={`${process.env.PUBLIC_URL}/images/mypage/confirm.png`}/>
+            <p className="confirm-modal-semibold">평가가 제출되었습니다.</p>
+            <div className="confirm-modal-buttons">
+              <button className="confirm-modal-button yes" onClick={confirmBtn}>
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
+
 }
+
+
 
 export default MyComments;
