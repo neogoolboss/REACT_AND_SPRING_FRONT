@@ -4,12 +4,13 @@ import '../../styles/fonts.css';
 import MyHoneypot from '../../Components/mypage/MyHoneypot';
 import ParticipatingHoneypot from '../../Components/mypage/ParticipatingHoneypot';
 import MyComments from '../../Components/mypage/MyComments';
+import Review from '../../Components/mypage/Review';
 import { useState } from 'react'
 
 
 const MyPage = () => {
 
-    const [selectedMenu, setSelectedMenu] = useState('participatingHoneypot')
+    const [selectedMenu, setSelectedMenu] = useState('review')
 
 
   return (
@@ -49,7 +50,7 @@ const MyPage = () => {
                 <p onClick={() => { setSelectedMenu('participatingHoneypot')}} className='category-sub'>참여중인 허니팟</p>
                 <p onClick={() => { setSelectedMenu('myHoneypot')}} className='category-sub'>내가 만든 허니팟</p>
                 <p onClick={() => { setSelectedMenu('myComments')}} className='category-sub'>내가 쓴 댓글</p>
-                <p className='category-main'>멤버 평가</p>
+                <p onClick={() => { setSelectedMenu('review')}} className='category-main'>멤버 평가</p>
                 <p className='category-main'>문의 내역</p>
                 <p className='category-main'>프로필 수정</p>
             </div>
@@ -61,6 +62,7 @@ const MyPage = () => {
             {selectedMenu === 'participatingHoneypot' && <ParticipatingHoneypot/>}
             {selectedMenu === 'myHoneypot' && <MyHoneypot/>}
             {selectedMenu === 'myComments' && <MyComments/>}
+            {selectedMenu === 'review' && <Review />}
             {/* 마이페이지 메인 - 고정 디테일 */}
         </div>
        
