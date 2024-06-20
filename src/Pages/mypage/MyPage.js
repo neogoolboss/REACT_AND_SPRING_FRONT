@@ -12,7 +12,7 @@ import { useState } from 'react'
 const MyPage = () => {
 
     const [selectedMenu, setSelectedMenu] = useState('review')
-    const [showMannerStarModal, setShowMannerStarModal] = useState(true);
+    const [showMannerStarModal, setShowMannerStarModal] = useState(false);
   
     const mannerStarClick = () => {
     setShowMannerStarModal(true);

@@ -5,7 +5,6 @@ function MyComments() {
   const [자료있음, 자료변경] = useState(true);
   const [showReCheckModal, setShowReCheckModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [당기나마나자료, 당기나마나자료변경] = useState(null);
   
 
   /* 제출버튼 눌렀을 때 모달창 띄우기 */
@@ -29,17 +28,22 @@ function MyComments() {
 
   /* 프로필 선택 */
   const profiles = [
-    { imgSrc: "/images/mypage/profile-father.png", name: "웅이아버지" },
-    { imgSrc: "/images/mypage/profile-song.png", name: "귀여운처제" },
-    { imgSrc: "/images/mypage/profile-push.png", name: "당기나미나" },
+    { imgSrc: "/images/mypage/profile-father.png", name: "웅이아버지", review: "null"},
+    { imgSrc: "/images/mypage/profile-song.png", name: "귀여운처제", review: "null" },
+    { imgSrc: "/images/mypage/profile-push.png", name: "당기나미나", review: "notNull" },
   ];
 
   const [selectedProfileIndex, setSelectedProfileIndex] = useState(null);
 
   const profileClick = (index) => {
-    setSelectedProfileIndex(index);
-    setSelectedPointIndex(null); // 프로필 선택 시 포인트 선택 초기화
-    setSelectedRadio(null); // 프로필 선택 시 라디오 버튼 초기화
+
+    // 평점가를 완료하면 선택안됨.
+    if (profiles[index].review === 'null') {
+      setSelectedProfileIndex(index);
+      setSelectedPointIndex(null); // 프로필 선택 시 포인트 선택 초기화
+      setSelectedRadio(null); // 프로필 선택 시 라디오 버튼 초기화
+    }
+
   };
 
   const pointClick = (index) => {
