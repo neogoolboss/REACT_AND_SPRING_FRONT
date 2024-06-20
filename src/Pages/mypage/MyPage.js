@@ -6,13 +6,26 @@ import MyHoneypot from '../../Components/mypage/MyHoneypot';
 import ParticipatingHoneypot from '../../Components/mypage/ParticipatingHoneypot';
 import MyComments from '../../Components/mypage/MyComments';
 import Review from '../../Components/mypage/Review';
+import MyInquiry from '../../Components/mypage/MyInquiry';
+import EditProfile from '../../Components/mypage/EditProfile';
 import { useState } from 'react'
 
 
 const MyPage = () => {
 
-    const [selectedMenu, setSelectedMenu] = useState('review')
+    const [selectedMenu, setSelectedMenu] = useState('editProfile')
     const [showMannerStarModal, setShowMannerStarModal] = useState(false);
+
+    // 기존 이름 더미데이터
+  const [nickName, setNickName] = useState('전소민');
+  const [introduce, setIntroduce] = useState('반복되는 일상을 특별하게 만들어 보고 싶어요.')
+  const [interest, setInterest] = useState('');
+
+   // 프로필 변경
+  const profileUpdate = (newNickName, newIntroduce) => {
+    setNickName(newNickName);
+    setIntroduce(newIntroduce);
+  };
   
     const mannerStarClick = () => {
     setShowMannerStarModal(true);
@@ -43,9 +56,9 @@ const MyPage = () => {
                 </div>
             </div>
             <div className='profile-text'>
-                <div className='profile-nickname'>전소민</div>
+                <div className='profile-nickname'>{nickName}</div>
                 <div className='profile-intro'>
-                    반복되는 일상을 특별하게 만들어 보고 싶어요.
+                    {introduce}
                 </div>
             </div>
             <div className='manner-box' onClick={mannerStarClick}>
@@ -65,8 +78,8 @@ const MyPage = () => {
                 <p onClick={() => { setSelectedMenu('myHoneypot')}} className='category-sub'>내가 만든 허니팟</p>
                 <p onClick={() => { setSelectedMenu('myComments')}} className='category-sub'>내가 쓴 댓글</p>
                 <p onClick={() => { setSelectedMenu('review')}} className='category-main'>멤버 평가</p>
-                <p className='category-main'>문의 내역</p>
-                <p className='category-main'>프로필 수정</p>
+                <p onClick={() => { setSelectedMenu('myInquiry')}} className='category-main'>문의 내역</p>
+                <p onClick={() => { setSelectedMenu('editProfile')}} className='category-main'>프로필 수정</p>
             </div>
 
             
@@ -80,6 +93,8 @@ const MyPage = () => {
             {selectedMenu === 'myHoneypot' && <MyHoneypot/>}
             {selectedMenu === 'myComments' && <MyComments/>}
             {selectedMenu === 'review' && <Review />}
+            {selectedMenu === 'myInquiry' && <MyInquiry />}
+            {selectedMenu === 'editProfile' && <EditProfile nickName = {nickName} introduce = {introduce} profileUpdate={profileUpdate} /> }
             
             
 
@@ -92,7 +107,7 @@ const MyPage = () => {
             <div className="manner-modal-content"> 
                 <div className='manner-modal-header'>
                     <img onClick={ backBtn } src={`${process.env.PUBLIC_URL}/images/mypage/back-icon.png`} alt="유저평점아이콘" />
-                    <p> 전소민 </p>
+                    <p> {nickName} </p>
                 </div>
 
                 <div className='manner-modal-middle'>
