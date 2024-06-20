@@ -12,6 +12,19 @@ import { useState } from 'react'
 const MyPage = () => {
 
     const [selectedMenu, setSelectedMenu] = useState('review')
+    const [showMannerStarModal, setShowMannerStarModal] = useState(true);
+  
+    const mannerStarClick = () => {
+    setShowMannerStarModal(true);
+  }
+
+  const mannerStarconfirmBtn = () => {
+    setShowMannerStarModal(false);
+  }
+
+  const backBtn = () => {
+    setShowMannerStarModal(false);
+  }
 
 
   return (
@@ -35,7 +48,7 @@ const MyPage = () => {
                     반복되는 일상을 특별하게 만들어 보고 싶어요.
                 </div>
             </div>
-            <div className='manner-box'>
+            <div className='manner-box' onClick={mannerStarClick}>
                 <img src={`${process.env.PUBLIC_URL}/images/common/manner-star-icon.png`} alt="유저평점아이콘" />
                 <div className='manner-text'>
                     <p>유저평점</p>
@@ -72,8 +85,47 @@ const MyPage = () => {
 
             {/* 마이페이지 메인 - 고정 디테일 */}
         </div>
-       
-    </div>
+    
+
+    {showMannerStarModal && (
+        <div className="manner-modal-container">
+            <div className="manner-modal-content"> 
+                <div className='manner-modal-header'>
+                    <img onClick={ backBtn } src={`${process.env.PUBLIC_URL}/images/mypage/back-icon.png`} alt="유저평점아이콘" />
+                    <p> 전소민 </p>
+                </div>
+
+                <div className='manner-modal-middle'>
+                    <p className='middle-title'>유저평점</p>
+                    <div className='star-point-container'>
+                        <img src={`${process.env.PUBLIC_URL}/images/common/manner-star-icon.png`} alt="유저평점아이콘" />
+                        <p>4.9 / 5</p>
+                    </div>
+                    <div className='people-count-container'>
+                        <img src={`${process.env.PUBLIC_URL}/images/mypage/people.png`} alt="유저평점아이콘" />
+                        <p>N명의 멤버 평가 반영</p>
+                    </div>
+                </div>
+
+                <div className='manner-modal-bottom'>
+                    <p className='bottom-title'>멤버평가</p>
+                    <div className='bottom-review-container'>
+                        <div className='bottom-review-text'>유쾌하고 밝은 에너지로 분위기 메이커 역할을 했어요.</div>
+                        <div className='bottom-review-text'>취향이 통하는 멤버를 만나 좋았어요. 다음에 또 만나고 싶어요.</div>
+                        <div className='bottom-review-text'>덕분에 시간가는 줄 모르고 즐거운 경험을 했어요.</div>
+                        <div className='bottom-review-text'>주도적으로 모임에 잘 참여해 주셨어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                        <div className='bottom-review-text'>대화코드가 잘 맞아 즐겁게 대화할 수 있었어요.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )}
+</div>
   );
 };
 
