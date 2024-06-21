@@ -8,7 +8,8 @@ import MyComments from '../../Components/mypage/MyComments';
 import Review from '../../Components/mypage/Review';
 import MyInquiry from '../../Components/mypage/MyInquiry';
 import EditProfile from '../../Components/mypage/EditProfile';
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { render } from '@testing-library/react';
 
 
 const MyPage = () => {
@@ -16,10 +17,44 @@ const MyPage = () => {
     const [selectedMenu, setSelectedMenu] = useState('editProfile')
     const [showMannerStarModal, setShowMannerStarModal] = useState(false);
 
+    // 프로필 사진 변경
+    const [profileImage, setProfileImage] = useState(`${process.env.PUBLIC_URL}/images/mypage/empty-profile-pic.jpg`);
+    const fileInput = useRef(null)
+    const [imageURL, setImageURL] = useState(profileImage);
+
+    const onChangeProfilePic = (e) => {
+        if (e.target.files[0]) {
+            const file = e.target.files[0];
+            setProfileImage(file);
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setImageURL(reader.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setProfileImage(`${process.env.PUBLIC_URL}/images/mypage/empty-profile-pic.jpg`);
+            setImageURL(`${process.env.PUBLIC_URL}/images/mypage/empty-profile-pic.jpg`);
+        }
+    };
+
+    useEffect(() => {
+        if (typeof profileImage === 'string') {
+            setImageURL(profileImage);
+        } else {
+            const objectURL = URL.createObjectURL(profileImage);
+            setImageURL(objectURL);
+
+            return () => URL.revokeObjectURL(objectURL);
+        }
+    }, [profileImage]);
+
+
     // 기존 이름 더미데이터
   const [nickName, setNickName] = useState('전소민');
   const [introduce, setIntroduce] = useState('반복되는 일상을 특별하게 만들어 보고 싶어요.')
-  const [interest, setInterest] = useState('');
 
    // 프로필 변경
   const profileUpdate = (newNickName, newIntroduce) => {
@@ -50,9 +85,12 @@ const MyPage = () => {
         {/* 프로필 상부 */}
         <div className="profile-top">
             <div className="profile-box">
-                <div className="profile-pic">IMAGE</div>
-                <div className="profile-pic-update-btn">
+            <img src={imageURL} className="profile-pic" alt="프로필사진" />
+                    
+                <div className="profile-pic-update-btn" onClick={()=>{fileInput.current.click()}}>
                    <img src={`${process.env.PUBLIC_URL}/images/common/update-pic-icon.png`} alt="사진변경아이콘" />
+                   <input type='file' style={{ display: 'none' }} ref={fileInput} accept='image/jpg, image/png, image/jpeg' name='profile_img' onChange={onChangeProfilePic}
+                />
                 </div>
             </div>
             <div className='profile-text'>
