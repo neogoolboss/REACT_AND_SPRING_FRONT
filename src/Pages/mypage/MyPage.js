@@ -6,20 +6,42 @@ import MyHoneypot from '../../Components/mypage/MyHoneypot';
 import ParticipatingHoneypot from '../../Components/mypage/ParticipatingHoneypot';
 import MyComments from '../../Components/mypage/MyComments';
 import Review from '../../Components/mypage/Review';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 const MyPage = () => {
 
     const [selectedMenu, setSelectedMenu] = useState('review')
 
+    /* 백엔드 연결 테스트 */
+const [data, setData] = useState([]);
+
+useEffect(() => {
+    fetch("/mypage")
+        .then((res) => res.json())
+        .then((result) => {
+            // result가 배열인지 확인하고 배열이 아닐 경우 빈 배열로 설정
+            if (Array.isArray(result)) {
+                setData(result);
+            } else {
+                console.error("Data is not an array:", result);
+                setData([]);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+            setData([]);
+        });
+}, []);
 
   return (
     <div className='mypage-container'>
         {/* 페이지 제목 */}
         <div className="title">
             마이페이지
+        
         </div>
+        
         {/* 페이지 제목 */}
         {/* 프로필 상부 */}
         <div className="profile-top">
@@ -72,7 +94,10 @@ const MyPage = () => {
 
             {/* 마이페이지 메인 - 고정 디테일 */}
         </div>
-       
+        <ul>
+       {data.map((v,idx)=><li key={`${idx}-${v}`}>{v}</li>)}
+    </ul>
+        
     </div>
   );
 };
